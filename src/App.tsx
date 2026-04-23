@@ -504,25 +504,36 @@ function Contact({ t }: { t: any }) {
 
         {/* Right Side: Contact Form */}
         <SpotlightCard className="p-8 md:p-10 shadow-2xl relative overflow-hidden text-left bg-transparent border-white/5">
-          <form className="space-y-6 relative z-10" onSubmit={(e) => e.preventDefault()}>
+          <form 
+            className="space-y-6 relative z-10" 
+            onSubmit={(e) => {
+              e.preventDefault();
+              const formData = new FormData(e.currentTarget);
+              const name = formData.get('name');
+              const email = formData.get('email');
+              const subject = formData.get('subject');
+              const message = formData.get('message');
+              window.location.href = `mailto:ozdemrr.mehmet@gmail.com?subject=${subject}&body=Gönderen: ${name} (${email})%0D%0A%0D%0A${message}`;
+            }}
+          >
             <div className="space-y-2">
                <label className="text-[10px] tracking-[0.2em] font-bold text-white/50 uppercase">{t.formName}</label>
-               <input type="text" className="w-full bg-white/5 border border-white/10 p-4 rounded-xl outline-none focus:border-accent/50 focus:bg-white/10 transition-all duration-300 text-white text-sm" />
+               <input name="name" required type="text" className="w-full bg-white/5 border border-white/10 p-4 rounded-xl outline-none focus:border-accent/50 focus:bg-white/10 transition-all duration-300 text-white text-sm" />
             </div>
             
             <div className="space-y-2">
                <label className="text-[10px] tracking-[0.2em] font-bold text-white/50 uppercase">{t.formEmail}</label>
-               <input type="email" className="w-full bg-white/5 border border-white/10 p-4 rounded-xl outline-none focus:border-accent/50 focus:bg-white/10 transition-all duration-300 text-white text-sm" />
+               <input name="email" required type="email" className="w-full bg-white/5 border border-white/10 p-4 rounded-xl outline-none focus:border-accent/50 focus:bg-white/10 transition-all duration-300 text-white text-sm" />
             </div>
             
             <div className="space-y-2">
                <label className="text-[10px] tracking-[0.2em] font-bold text-white/50 uppercase">{t.formSubject}</label>
-               <input type="text" className="w-full bg-white/5 border border-white/10 p-4 rounded-xl outline-none focus:border-accent/50 focus:bg-white/10 transition-all duration-300 text-white text-sm" />
+               <input name="subject" required type="text" className="w-full bg-white/5 border border-white/10 p-4 rounded-xl outline-none focus:border-accent/50 focus:bg-white/10 transition-all duration-300 text-white text-sm" />
             </div>
             
             <div className="space-y-2">
                <label className="text-[10px] tracking-[0.2em] font-bold text-white/50 uppercase">{t.formMessage}</label>
-               <textarea rows={4} className="w-full bg-white/5 border border-white/10 p-4 rounded-xl outline-none focus:border-accent/50 focus:bg-white/10 transition-all duration-300 text-white text-sm resize-none"></textarea>
+               <textarea name="message" required rows={4} className="w-full bg-white/5 border border-white/10 p-4 rounded-xl outline-none focus:border-accent/50 focus:bg-white/10 transition-all duration-300 text-white text-sm resize-none"></textarea>
             </div>
             
             <button type="submit" className="w-full bg-transparent border border-white/10 text-white/80 font-bold py-4 rounded-xl hover:bg-accent hover:text-[#020205] hover:border-transparent transition-all duration-500 mt-4 uppercase tracking-[0.2em] text-[10px]">
