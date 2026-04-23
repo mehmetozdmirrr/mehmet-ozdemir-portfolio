@@ -506,16 +506,11 @@ function Contact({ t }: { t: any }) {
         <SpotlightCard className="p-8 md:p-10 shadow-2xl relative overflow-hidden text-left bg-transparent border-white/5">
           <form 
             className="space-y-6 relative z-10" 
-            onSubmit={(e) => {
-              e.preventDefault();
-              const formData = new FormData(e.currentTarget);
-              const name = formData.get('name');
-              const email = formData.get('email');
-              const subject = formData.get('subject');
-              const message = formData.get('message');
-              window.location.href = `mailto:ozdemrr.mehmet@gmail.com?subject=${subject}&body=Gönderen: ${name} (${email})%0D%0A%0D%0A${message}`;
-            }}
+            action="https://api.web3forms.com/submit" 
+            method="POST"
           >
+            <input type="hidden" name="access_key" value="2fbd3c5d-da11-47d6-b81a-0f36647e7803" />
+            
             <div className="space-y-2">
                <label className="text-[10px] tracking-[0.2em] font-bold text-white/50 uppercase">{t.formName}</label>
                <input name="name" required type="text" className="w-full bg-white/5 border border-white/10 p-4 rounded-xl outline-none focus:border-accent/50 focus:bg-white/10 transition-all duration-300 text-white text-sm" />
